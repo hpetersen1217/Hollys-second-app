@@ -1,7 +1,8 @@
 HollysBlocipedia::Application.routes.draw do
-  
-  resources :articles
 
+  resources :wikis do 
+    resources :articles, except: [:index]
+  end
   
 
 

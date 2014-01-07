@@ -1,4 +1,9 @@
 class ArticlesController < ApplicationController
+  before_filter :load_wiki
+
+  def load_wiki
+    @wiki = Wiki.find(params[:wiki_id])
+  end   
 
   def index
     @articles = Article.all
@@ -13,10 +18,10 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(params[:article])
+    @article = @wiki.articles.new(params[:article])
     if @article.save
       flash[:notice] = "Article was saved."
-      redirect_to @article
+      redirect_to [@wiki, @article]
     else
       flash[:error] = "There was an error saving the post. Please try again."
       render :new
@@ -43,9 +48,9 @@ class ArticlesController < ApplicationController
     name = @article.name
     if @article.destroy
       flash[:notice] = "\"#{name}\" was deleted successfully."
-      redirect_to articles_path
+      redirect_to wiki_articles_path
     else
-      flahs[:notice] = "There was an error deleting the topic."
+      flash[:notice] = "There was an error deleting the topic."
       render :show
     end
   end

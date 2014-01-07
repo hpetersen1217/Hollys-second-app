@@ -1,0 +1,7 @@
+<h1><%= @wiki.title %></h1>
+    <p><%= @wiki.body %></p>
+    <% @articles.each do |article| %>
+        <h4><%= link_to article.title, [@wiki, article] %></h4>
+  <% end %>
+      <%= link_to "New Article", new_wiki_article_path(@wiki) %>
+  

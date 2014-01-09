@@ -1,8 +1,11 @@
 HollysBlocipedia::Application.routes.draw do
 
+  devise_for :users
   resources :wikis do 
     resources :articles, except: [:index]
   end
+
+  root :to => 'wikis#new'
   
 
 

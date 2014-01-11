@@ -1,8 +1,12 @@
 HollysBlocipedia::Application.routes.draw do
 
+  get "comments/create"
+
   devise_for :users
   resources :wikis do 
-    resources :articles, except: [:index]
+    resources :articles, except: [:index] do
+      resources :comments, only: [:create, :destroy]
+    end
   end
 
   root :to => 'wikis#new'

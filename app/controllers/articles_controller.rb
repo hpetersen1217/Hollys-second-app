@@ -11,6 +11,8 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @comments = @article.comments
+    @comment = Comment.new
   end
 
   def new
@@ -18,7 +20,11 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = @wiki.articles.new(params[:article])
+    # @article = Article.new(params[:article])
+    @article = current_user.articles.build(params[:article])
+    @article.wiki = @wiki
+    # @article = @wiki.articles.build([:article])
+    # @article.user = current_user
     if @article.save
       flash[:notice] = "Article was saved."
       redirect_to [@wiki, @article]

@@ -1,15 +1,21 @@
 HollysBlocipedia::Application.routes.draw do
 
-  get "comments/create"
+  get "collaborations/index"
 
+  get "welcome/index"
+
+  get "welcome/about"
+
+  resources :charges, only: [:new, :create]
   devise_for :users
   resources :wikis do 
+    resource :collaborations, only: [:show, :create, :destroy]
     resources :articles, except: [:index] do
       resources :comments, only: [:create, :destroy]
     end
   end
 
-  root :to => 'wikis#new'
+  root :to => 'welcome#index'
   
 
 

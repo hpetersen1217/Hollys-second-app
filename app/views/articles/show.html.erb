@@ -1,5 +1,7 @@
 <h1><%= @article.title %></h1>
+<% if can? :edit, @article %>
 <%= link_to "Edit", edit_wiki_article_path(@wiki, @article) %>
+<% end %>
 <p><% @article.body %></p>
 
 

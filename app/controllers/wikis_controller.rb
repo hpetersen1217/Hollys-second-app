@@ -1,9 +1,11 @@
 class WikisController < ApplicationController
+
   def index
     @wiki = Wiki.all
   end
 
   def new
+    authorize! :create, Wiki
     @wiki = Wiki.new
   end
 

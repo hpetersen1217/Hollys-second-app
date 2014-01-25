@@ -4,8 +4,9 @@
           <%= link_to wiki.title, wiki %>
             <%= wiki.body %>
       <% end %>
+        <% if can? :create, Wiki %>
           <%= link_to "New Wiki", new_wiki_path %>
-      
+        <% end %>
   
  
 

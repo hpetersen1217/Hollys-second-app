@@ -1,0 +1,12 @@
+<h1> Current Collaborators </h1>
+  <% @wiki.users.each do |user| %>
+    <%= user.email %>
+    <%= link_to "remove as collaborator", wiki_collaborations_path(user_id: user.id), method: :delete %>
+    <% end %>
+    
+
+<h1>Nominate collaborators </h1>
+  <% User.all.each do |user| %>
+    <%= user.email %>
+    <%= link_to "add as collaborator", wiki_collaborations_path(user_id: user.id), method: :post %>
+    <% end %> 
